@@ -5,15 +5,38 @@
 body {
   background-color: black;
   color: white;
+  font-family: 'Roboto', sans-serif;
 }
 
 .btn {
   background-color: $purple;
+  color: white;
+  text-transform: uppercase;
+  &:hover {
+    color: white;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+}
+
+img {
+  width: 75%;
 }
 
 .App {
   background-color: $gray;
   border-radius: 10px;
-  margin: auto;
   text-align: center;
+  border: $purple 5px solid;
+  padding: 5vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vh;
+}
+
+.joke-container > * {
+  margin: 10px;
 }
