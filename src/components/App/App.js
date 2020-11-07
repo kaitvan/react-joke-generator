@@ -1,13 +1,9 @@
 import React from 'react';
-// import Punchline from '../punchline';
-import Setup from '../setup';
-// import Button from '../button';
 import jokeData from '../../helpers/data/jokeData';
-import PunchlineBtn from '../getPunchline';
 
 class App extends React.Component {
   state = {
-    joke: {},
+    display: 'get-joke',
   }
 
   componentDidMount() {
@@ -18,24 +14,58 @@ class App extends React.Component {
     });
   }
 
+  getJoke = () => {
+    this.setState({
+      display: 'setup',
+    });
+  }
+
+  getPunchline = () => {
+    this.setState({
+      display: 'punchline',
+    });
+  }
+
   getNewJoke = () => {
     jokeData.getJoke().then((response) => {
       this.setState({
         joke: response,
+        display: 'get-joke',
       });
     });
-    const string = document.getElementById('punchlineDiv');
-    string.innerHTML = '';
   }
 
   render() {
+    const { joke, display } = this.state;
+    let domElements;
+    if (display === 'get-joke') {
+      domElements = (
+        <div>
+          <button className='btn' onClick={this.getJoke}>Get a Joke</button>
+        </div>
+      );
+    } else if (display === 'setup') {
+      domElements = (
+        <div>
+          <div className='setup'>{joke.setup}</div>
+          <button className='btn' onClick={this.getPunchline}>Get Punchline</button>
+        </div>
+      );
+    } else if (display === 'punchline') {
+      domElements = (
+        <div>
+          <div className='setup'>{joke.setup}</div>
+          <div className='punchline'>{joke.punchline}</div>
+          <button className='btn' onClick={this.getNewJoke}>Get A New Joke</button>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h2>React JS Joke Generator</h2>
         <div className='joke-container'>
-          <div className='div-setup'><Setup setup={this.state.joke.setup}/></div>
-          <PunchlineBtn punchline={this.state.joke.punchline}/>
-          <button onClick={this.getNewJoke}>Get a New Joke</button>
+          {domElements}
         </div>
       </div>
     );
