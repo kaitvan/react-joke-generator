@@ -40,20 +40,20 @@ class App extends React.Component {
     let domElements;
     if (display === 'get-joke') {
       domElements = (
-        <div>
+        <div className='joke-container'>
           <button className='btn' onClick={this.getJoke}>Get a Joke</button>
         </div>
       );
     } else if (display === 'setup') {
       domElements = (
-        <div>
+        <div className='joke-container'>
           <div className='setup'>{joke.setup}</div>
           <button className='btn' onClick={this.getPunchline}>Get Punchline</button>
         </div>
       );
     } else if (display === 'punchline') {
       domElements = (
-        <div>
+        <div className='joke-container'>
           <div className='setup'>{joke.setup}</div>
           <div className='punchline'>{joke.punchline}</div>
           <button className='btn' onClick={this.getNewJoke}>Get A New Joke</button>
@@ -63,10 +63,8 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h2>React JS Joke Generator</h2>
-        <div className='joke-container'>
+        <img className='logo' src='https://raw.githubusercontent.com/kaitvan/react-joke-generator/master/react-joke-logo.png' alt='logo'></img>
           {domElements}
-        </div>
       </div>
     );
   }
